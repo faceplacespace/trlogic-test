@@ -2,4 +2,5 @@
 
 return [
     '' => 'site/index',
+    'signup' => 'register/register',
 ];

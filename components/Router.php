@@ -8,16 +8,7 @@ class Router
 
     public function __construct()
     {
-        $routesPath = $_SERVER['DOCUMENT_ROOT'] . '/config/routes.php';
-
-        $this->routes = include($routesPath);
-    }
-
-    private function getURI()
-    {
-        if (!empty($_SERVER['REQUEST_URI'])) {
-            return trim($_SERVER['REQUEST_URI'], '/');
-        }
+        $this->routes = include($_SERVER['DOCUMENT_ROOT'] . '/config/routes.php');
     }
 
     public function run()
@@ -26,13 +17,13 @@ class Router
 
         foreach ($this->routes as $uriPattern => $path) {
 
-            if (preg_match("~$uriPattern~", $uri)) {
+            if ($uriPattern === $uri) {
                 $internalRoute = preg_replace("~$uriPattern~", $path, $uri);
 
                 $segments = explode('/', $internalRoute);
                 $controllerName = array_shift($segments) . 'Controller';
                 $controllerName = 'app\controllers\\' . ucfirst($controllerName);
-                $actionName = 'action' . ucfirst(array_shift($segments));
+                $actionName = strtolower(array_shift($segments));
                 $parameters = $segments;
 
                 $controllerFile = $_SERVER['DOCUMENT_ROOT'] . '/app/controllers/' .
@@ -50,6 +41,13 @@ class Router
                     break;
                 }
             }
+        }
+    }
+
+    private function getURI()
+    {
+        if (!empty($_SERVER['REQUEST_URI'])) {
+            return trim($_SERVER['REQUEST_URI'], '/');
         }
     }
 }

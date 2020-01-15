@@ -4,7 +4,8 @@ namespace app\controllers;
 
 class SiteController
 {
-    public function actionIndex() {
+    public function index()
+    {
         include '../app/views/index.view.php';
     }
 }
