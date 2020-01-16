@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\User;
+use components\FlashMessages;
 
 class LoginController
 {
@@ -30,7 +31,7 @@ class LoginController
             $errors[] = 'Please enter a valid email address';
         }
 
-        if (!$user->exists($email)) {
+        if (empty($errors) && !$user->exists($email)) {
             $errors[] = 'User does not exist';
         }
 
@@ -38,6 +39,7 @@ class LoginController
             $user->auth($email);
             header('Location: /');
         } else {
+            FlashMessages::add($errors);
             header('Location: /signin');
         }
     }

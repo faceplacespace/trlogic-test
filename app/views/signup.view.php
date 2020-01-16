@@ -19,7 +19,8 @@
             <div class="card-heading"></div>
             <div class="card-body">
                 <h2 class="title">Sign Up</h2>
-                <form method="POST" action="/signup" id="signup">
+                <?=components\FlashMessages::show();?>
+                <form method="POST" action="/create" id="signup">
                     <div class="input-group">
                         <input class="input--style-1" type="text" placeholder="EMAIL" name="email">
                     </div>

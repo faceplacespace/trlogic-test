@@ -321,6 +321,10 @@ input[type="file"] {
   color: #777;
 }
 
+.flash {
+  color: #f33467;
+}
+
 @media (max-width: 767px) {
   .card-1 .card-body {
     padding: 0 40px;

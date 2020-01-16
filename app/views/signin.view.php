@@ -19,6 +19,7 @@
             <div class="card-heading"></div>
             <div class="card-body">
                 <h2 class="title">Sign In</h2>
+                <?=components\FlashMessages::show();?>
                 <form method="POST" action="/auth">
                     <div class="input-group">
                         <input class="input--style-1" type="text" placeholder="EMAIL" name="email">
