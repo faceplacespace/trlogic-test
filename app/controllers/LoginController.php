@@ -8,6 +8,10 @@ class LoginController
 {
     public function index()
     {
+        if (User::isAuth()) {
+            header('Location: /');
+        }
+
         include '../app/views/signin.view.php';
     }
 
@@ -18,13 +22,11 @@ class LoginController
         $email = trim(htmlspecialchars($_POST['email']));
         $password = trim(htmlspecialchars($_POST['password']));
 
-        $errors = false;
-
-        if (strlen($password) < 3) {
+        if (!User::checkPassword($password)) {
             $errors[] = 'Password is too short.';
         }
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (!User::checkEmail($email)) {
             $errors[] = 'Please enter a valid email address';
         }
 
@@ -34,7 +36,7 @@ class LoginController
 
         if (!$errors) {
             $user->auth($email);
-            header('Location: /profile');
+            header('Location: /');
         } else {
             header('Location: /signin');
         }
@@ -45,6 +47,6 @@ class LoginController
         unset($_SESSION['user']);
         session_destroy();
 
-        header('Location: /');
+        header('Location: /signin');
     }
 }

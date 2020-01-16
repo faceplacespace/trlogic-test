@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use components\Database;
-
 class User extends Model
 {
     public static function auth($email)
@@ -19,6 +17,20 @@ class User extends Model
         return false;
     }
 
+    public static function checkEmail($email)
+    {
+        return filter_var($email, FILTER_VALIDATE_EMAIL);
+    }
+
+    public static function checkPassword($password)
+    {
+        if (strlen($password) < 7) {
+            return false;
+        }
+
+        return true;
+    }
+
     public function create(array $data)
     {
         $stmt = $this->db->prepare('INSERT INTO users (email, password) VALUES (:email, :password)');
@@ -26,6 +38,11 @@ class User extends Model
             ':email' => $data['email'],
             ':password' => $this->passwordHash($data['password'])
         ]);
+    }
+
+    private function passwordHash($password)
+    {
+        return password_hash($password, PASSWORD_BCRYPT);
     }
 
     public function exists($email)
@@ -38,6 +55,13 @@ class User extends Model
         }
 
         return false;
+    }
+
+    public function getOne($email)
+    {
+        $stmt = $this->db->prepare('SELECT * FROM users WHERE email = :email');
+        $stmt->execute([':email' => $email]);
+        return $stmt->fetch();
     }
 
     public function check($email, $password)
@@ -53,10 +77,5 @@ class User extends Model
         }
 
         return false;
-    }
-
-    public function passwordHash($password)
-    {
-        return password_hash($password, PASSWORD_BCRYPT);
     }
 }

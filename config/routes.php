@@ -6,5 +6,6 @@ return [
     'create' => 'register/register',
     'signin' => 'login/index',
     'auth' => 'login/login',
+    'logout' => 'login/logout',
     'profile' => 'profile/index'
 ];

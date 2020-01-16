@@ -8,6 +8,10 @@ class RegisterController
 {
     public function index()
     {
+        if (User::isAuth()) {
+            header('Location: /');
+        }
+
         include '../app/views/signup.view.php';
     }
 
@@ -19,9 +23,7 @@ class RegisterController
         $password = trim(htmlspecialchars($_POST['password']));
         $passwordConfirm = trim(htmlspecialchars($_POST['passwordConfirm']));
 
-        $errors = false;
-
-        if (strlen($password) < 7) {
+        if (!User::checkPassword($password)) {
             $errors[] = 'Password is too short.';
         }
 
@@ -29,7 +31,7 @@ class RegisterController
             $errors[] = 'Passwords do not match.';
         }
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (!User::checkEmail($email)) {
             $errors[] = 'Please enter a valid email address';
         } else {
             if ($user->exists($email)) {
@@ -38,9 +40,10 @@ class RegisterController
         }
 
         if (!isset($error)) {
-            $user->create(compact('email','password'));
+            $user->create(compact('email', 'password'));
+            header('Location: /');
         } else {
-            include '../app/views/index.view.php';
+            include '../app/views/signin.view.php';
         }
     }
 }
