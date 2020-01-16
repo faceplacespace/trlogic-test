@@ -14,6 +14,7 @@ class Router
     public function run()
     {
         $uri = $this->getURI();
+        $uri = parse_url($uri, PHP_URL_PATH) ?? '';
 
         foreach ($this->routes as $uriPattern => $path) {
 

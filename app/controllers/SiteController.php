@@ -4,11 +4,11 @@ namespace app\controllers;
 
 use app\models\User;
 
-class SiteController
+class SiteController extends Controller
 {
     public function index()
     {
-        $title = 'Sign In';
+        $title = $this->dict['profile'];;
 
         if (!User::isAuth()) {
             header('Location: /signin');

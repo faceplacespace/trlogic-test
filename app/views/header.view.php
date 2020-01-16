@@ -13,3 +13,12 @@
 </head>
 
 <body>
+<header>
+    <div class="lang">
+        <a href="<?=parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)?>?lang=ru">RU</a>
+        <a href="<?=parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)?>?lang=en">EN</a>
+    </div>
+    <?php if(isset($_SESSION['user'])): ?>
+        <a href="/logout" class="logout"><?=$this->dict['logout']?></a>
+    <?php endif; ?>
+</header>

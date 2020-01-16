@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use app\models\ImageUpload;
 
-class ImageController
+class ImageController extends Controller
 {
     public function upload()
     {

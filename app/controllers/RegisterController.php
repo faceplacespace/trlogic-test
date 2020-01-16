@@ -5,11 +5,11 @@ namespace app\controllers;
 use app\models\User;
 use components\FlashMessages;
 
-class RegisterController
+class RegisterController extends Controller
 {
     public function index()
     {
-        $title = 'Sign Up';
+        $title = $this->dict['signup'];
 
         if (User::isAuth()) {
             header('Location: /');
@@ -21,33 +21,36 @@ class RegisterController
     public function register()
     {
         $user = new User();
-        $errors = false;
 
         $email = trim(htmlspecialchars($_POST['email']));
+        $username = trim(htmlspecialchars($_POST['username']));
         $password = trim(htmlspecialchars($_POST['password']));
         $passwordConfirm = trim(htmlspecialchars($_POST['passwordConfirm']));
+        $file = trim(htmlspecialchars($_POST['file']));
 
         if (!User::checkEmail($email)) {
-            $errors[] = 'Please enter a valid email address';
+            $errors[] = $this->dict['invalid_email_msg'];
         } else {
             if ($user->exists($email)) {
-                $errors[] = 'Email provided is already in use.';
+                $errors[] = $this->dict['email_exist_msg'];
             }
         }
 
         if (!User::checkPassword($password)) {
-            $errors[] = 'Password must be at least 6 characters.';
+            $errors[] = $this->dict['password_short_msg'];
         }
 
         if ($password !== $passwordConfirm) {
-            $errors[] = 'Passwords do not match.';
+            $errors[] = $this->dict['password_confirm_msg'];
         }
 
         if (!isset($errors)) {
-            $user->create(compact('email', 'password'));
+            $user->create(compact('email', 'username', 'password', 'file'));
+            $user->auth($email);
             header('Location: /');
         } else {
             FlashMessages::add($errors);
+
             header('Location: /signup');
         }
     }

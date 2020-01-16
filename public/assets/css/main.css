@@ -294,11 +294,22 @@ input {
   display: block;
 }
 
-a.logout {
+header {
   position: absolute;
   top: 15px;
   right: 30px;
+  z-index: 1;
+}
+
+header a {
   color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+div.lang {
+  margin-right: 30px;
+  float: left;
 }
 
 label{
@@ -323,6 +334,17 @@ input[type="file"] {
 
 .flash {
   color: #f33467;
+}
+
+.bottom-link {
+  color: #777;
+  float: right;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.bottom-link:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 767px) {

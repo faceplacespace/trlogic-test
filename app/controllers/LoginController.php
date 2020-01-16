@@ -5,11 +5,11 @@ namespace app\controllers;
 use app\models\User;
 use components\FlashMessages;
 
-class LoginController
+class LoginController extends Controller
 {
     public function index()
     {
-        $title = 'Sign In';
+        $title = $this->dict['signin'];;
 
         if (User::isAuth()) {
             header('Location: /');
@@ -26,15 +26,15 @@ class LoginController
         $password = trim(htmlspecialchars($_POST['password']));
 
         if (!User::checkPassword($password)) {
-            $errors[] = 'Password must be at least 6 characters.';
+            $errors[] = $this->dict['password_short_msg'];
         }
 
         if (!User::checkEmail($email)) {
-            $errors[] = 'Please enter a valid email address';
+            $errors[] = $this->dict['invalid_email_msg'];
         }
 
         if (empty($errors) && !$user->exists($email)) {
-            $errors[] = 'User does not exist';
+            $errors[] = $this->dict['user_exist_msg'];
         }
 
         if (!$errors) {

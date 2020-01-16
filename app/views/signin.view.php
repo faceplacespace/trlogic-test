@@ -5,19 +5,20 @@
         <div class="card card-1">
             <div class="card-heading"></div>
             <div class="card-body">
-                <h2 class="title">Sign In</h2>
+                <h2 class="title"><?=$this->dict['signin']?></h2>
                 <?=components\FlashMessages::show();?>
                 <form method="POST" action="/auth">
                     <div class="input-group">
-                        <input class="input--style-1" type="text" placeholder="EMAIL" name="email">
+                        <input class="input--style-1" type="text" placeholder="<?=$this->dict['email']?>" name="email">
                     </div>
                     <div class="input-group">
-                        <input class="input--style-1" type="text" placeholder="PASSWORD" name="password">
+                        <input class="input--style-1" type="password" placeholder="<?=$this->dict['password']?>" name="password">
                     </div>
                     <div class="p-t-20">
-                        <button class="btn btn--radius btn--green" type="submit">Submit</button>
+                        <button class="btn btn--radius btn--green" type="submit"><?=$this->dict['signin']?></button>
                     </div>
                 </form>
+                <a href="/signup" class="bottom-link"><?=$this->dict['signup']?></a>
             </div>
         </div>
     </div>

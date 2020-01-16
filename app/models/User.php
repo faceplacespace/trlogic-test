@@ -4,11 +4,6 @@ namespace app\models;
 
 class User extends Model
 {
-    public static function auth($email)
-    {
-        $_SESSION['user'] = $email;
-    }
-
     public static function isAuth()
     {
         if (isset($_SESSION['user'])) {
@@ -31,12 +26,19 @@ class User extends Model
         return true;
     }
 
+    public function auth($email)
+    {
+        $_SESSION['user'] = $email;
+    }
+
     public function create(array $data)
     {
-        $stmt = $this->db->prepare('INSERT INTO users (email, password) VALUES (:email, :password)');
+        $stmt = $this->db->prepare('INSERT INTO users (email, password, username, image) VALUES (:email, :password, :username, :file)');
         $stmt->execute([
             ':email' => $data['email'],
-            ':password' => $this->passwordHash($data['password'])
+            ':username' => $data['username'],
+            ':password' => $this->passwordHash($data['password']),
+            ':file' => $data['file']
         ]);
     }
 
