@@ -24,7 +24,7 @@ class User extends Model
 
     public static function checkPassword($password)
     {
-        if (strlen($password) < 7) {
+        if (strlen($password) < 6) {
             return false;
         }
 

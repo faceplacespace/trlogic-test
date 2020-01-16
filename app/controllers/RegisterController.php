@@ -24,7 +24,7 @@ class RegisterController
         $passwordConfirm = trim(htmlspecialchars($_POST['passwordConfirm']));
 
         if (!User::checkPassword($password)) {
-            $errors[] = 'Password is too short.';
+            $errors[] = 'Password must be at least 6 characters.';
         }
 
         if ($password != $passwordConfirm) {

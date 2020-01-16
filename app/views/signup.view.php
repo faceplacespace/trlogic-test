@@ -19,7 +19,7 @@
             <div class="card-heading"></div>
             <div class="card-body">
                 <h2 class="title">Sign Up</h2>
-                <form method="POST" action="/signup">
+                <form method="POST" action="/signup" id="signup">
                     <div class="input-group">
                         <input class="input--style-1" type="text" placeholder="EMAIL" name="email">
                     </div>
@@ -35,16 +35,50 @@
                                        name="passwordConfirm">
                             </div>
                         </div>
+                        <input type="hidden" name="file" value="">
+                        <div class="col-2">
+                            <label> Enter Your File
+                                <input type="file" form="upload-form">
+                            </label>
+                        </div>
+                        <div class="image"></div>
                     </div>
                     <div class="p-t-20">
                         <button class="btn btn--radius btn--green" type="submit">Submit</button>
                     </div>
+                </form>
+                <form method="post" action="#" enctype="multipart/form-data" id="upload-form">
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    let fileInput = document.querySelector('input[type="file"]');
 
+    fileInput.addEventListener("change", (e) => {
+        let formData = new FormData();
+        let file = e.target.files[0];
+
+        formData.append('file', file);
+
+        axios.post('/upload-image',
+            formData,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+        ).then(response => {
+            let imagePath = response.data.imageName;
+            document.querySelector('div.image').innerHTML = '<div class="uploaded-image">' +
+                '<img src="' + imagePath + '">' +
+                '</div>';
+            document.querySelector('input[name="file"]').value = imagePath;
+        });
+    });
+</script>
+</body>
 </html>

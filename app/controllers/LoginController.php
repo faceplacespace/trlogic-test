@@ -23,7 +23,7 @@ class LoginController
         $password = trim(htmlspecialchars($_POST['password']));
 
         if (!User::checkPassword($password)) {
-            $errors[] = 'Password is too short.';
+            $errors[] = 'Password must be at least 6 characters.';
         }
 
         if (!User::checkEmail($email)) {

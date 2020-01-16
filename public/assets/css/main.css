@@ -1,14 +1,9 @@
-
-/* ==========================================================================
-   #FONT
-   ========================================================================== */
+/* FONTS */
 .font-robo {
   font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
 }
 
-/* ==========================================================================
-   #GRID
-   ========================================================================== */
+/* GRID */
 .row {
   display: -webkit-box;
   display: -webkit-flex;
@@ -40,13 +35,7 @@
   }
 }
 
-/* ==========================================================================
-   #BOX-SIZING
-   ========================================================================== */
-/**
- * More sensible default box-sizing:
- * css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
- */
+/* BOX-SIZING */
 html {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -64,12 +53,7 @@ html {
   box-sizing: inherit;
 }
 
-/* ==========================================================================
-   #RESET
-   ========================================================================== */
-/**
- * A very simple reset that sits on top of Normalize.css.
- */
+/* RESET */
 body,
 h1, h2, h3, h4, h5, h6,
 blockquote, p, pre,
@@ -81,29 +65,18 @@ fieldset, legend {
   padding: 0;
 }
 
-/**
- * Remove trailing margins from nested lists.
- */
 li > ol,
 li > ul {
   margin-bottom: 0;
 }
 
-/**
- * Remove default table spacing.
- */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/**
- * 1. Reset Chrome and Firefox behaviour which sets a `min-width: min-content;`
- *    on fieldsets.
- */
 fieldset {
   min-width: 0;
-  /* [1] */
   border: 0;
 }
 
@@ -113,9 +86,7 @@ button {
   border: none;
 }
 
-/* ==========================================================================
-   #PAGE WRAPPER
-   ========================================================================== */
+/* PAGE WRAPPER */
 .page-wrapper {
   min-height: 100vh;
   position: relative;
@@ -155,16 +126,12 @@ h6 {
   font-size: 13px;
 }
 
-/* ==========================================================================
-   #BACKGROUND
-   ========================================================================== */
+/* BACKGROUND */
 .bg-blue {
   background: #2c6ed5;
 }
 
-/* ==========================================================================
-   #SPACING
-   ========================================================================== */
+/* SPACING */
 .p-t-100 {
   padding-top: 100px;
 }
@@ -177,9 +144,7 @@ h6 {
   padding-bottom: 100px;
 }
 
-/* ==========================================================================
-   #WRAPPER
-   ========================================================================== */
+/* WRAPPER */
 .wrapper {
   margin: 0 auto;
 }
@@ -191,9 +156,7 @@ h6 {
   max-width: 400px;
 }
 
-/* ==========================================================================
-   #BUTTON
-   ========================================================================== */
+/* BUTTON */
 .btn {
   line-height: 40px;
   display: inline-block;
@@ -223,9 +186,7 @@ h6 {
   background: #4dae3c;
 }
 
-/* ==========================================================================
-   #FORM
-   ========================================================================== */
+/* FORM */
 input {
   outline: none;
   margin: 0;
@@ -264,42 +225,29 @@ input {
 }
 
 .input--style-1::-webkit-input-placeholder {
-  /* WebKit, Blink, Edge */
   color: #555;
 }
 
 .input--style-1:-moz-placeholder {
-  /* Mozilla Firefox 4 to 18 */
   color: #555;
   opacity: 1;
 }
 
 .input--style-1::-moz-placeholder {
-  /* Mozilla Firefox 19+ */
   color: #555;
   opacity: 1;
 }
 
 .input--style-1:-ms-input-placeholder {
-  /* Internet Explorer 10-11 */
   color: #555;
 }
 
-.input--style-1:-ms-input-placeholder {
-  /* Microsoft Edge */
-  color: #555;
-}
-
-/* ==========================================================================
-   #TITLE
-   ========================================================================== */
+/* TITLE */
 .title {
   margin-bottom: 37px;
 }
 
-/* ==========================================================================
-   #CARD
-   ========================================================================== */
+/* CARD */
 .card {
   overflow: hidden;
   -webkit-border-radius: 3px;
@@ -351,6 +299,26 @@ a.logout {
   top: 15px;
   right: 30px;
   color: #fff;
+}
+
+label{
+  padding: 10px;
+  background: #2c6ed5;
+  display: table;
+  color: #fff;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.uploaded-image > img {
+  width: 130px;
+  height: 130px;
+}
+
+.delete-link {
+  color: #777;
 }
 
 @media (max-width: 767px) {
