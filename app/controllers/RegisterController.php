@@ -9,6 +9,8 @@ class RegisterController
 {
     public function index()
     {
+        $title = 'Sign Up';
+
         if (User::isAuth()) {
             header('Location: /');
         }

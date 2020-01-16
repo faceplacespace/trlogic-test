@@ -5,7 +5,7 @@ namespace components;
 class FlashMessages
 {
     /**
-     * save flash message to session
+     * add flash message to session
      * @param array $messages
      */
     public static function add($messages)
@@ -16,8 +16,8 @@ class FlashMessages
     }
 
     /**
-     * recall flash message from session and display
-     * @return string
+     * display flash messages
+     * @return mixed
      */
     public static function show()
     {

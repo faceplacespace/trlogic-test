@@ -9,6 +9,8 @@ class LoginController
 {
     public function index()
     {
+        $title = 'Sign In';
+
         if (User::isAuth()) {
             header('Location: /');
         }
