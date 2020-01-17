@@ -1,8 +1,0 @@
-/vendor
-.phpunit.result.cache
-/.idea
-/.vagrant
-Vagrantfile
-.DS_Store
-/uploads
-/config/db.php
