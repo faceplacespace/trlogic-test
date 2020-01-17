@@ -8,4 +8,3 @@
 5. `cd config`
 6. `cp db.example.php db.php`
 7. Fill the db.php file
-8. Sign up
