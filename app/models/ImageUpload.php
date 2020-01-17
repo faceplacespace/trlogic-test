@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use components\exception\ImageUploadException;
+use components\exceptions\ImageUploadException;
 
 class ImageUpload
 {
@@ -17,13 +17,19 @@ class ImageUpload
         $this->image = $imageData;
     }
 
+    /**
+     * Store uploaded image
+     *
+     * @return string
+     * @throws ImageUploadException
+     */
     public function uploadImage()
     {
         $this->validate();
 
         $fileName = $this->generateFileName();
 
-        if(!is_dir(self::UPLOAD_DIR)) {
+        if (!is_dir(self::UPLOAD_DIR)) {
             mkdir(self::UPLOAD_DIR, 0777, true);
         }
 
@@ -34,6 +40,10 @@ class ImageUpload
         return self::UPLOAD_DIR . $fileName;
     }
 
+    /**
+     * Validate image
+     * @throws ImageUploadException
+     */
     private function validate()
     {
         if (!isset($this->image['error']) || is_array($this->image['error']['error'])) {
@@ -72,6 +82,11 @@ class ImageUpload
         return strtolower(md5($this->image['name'] . time())) . '.' . $extension;
     }
 
+    /**
+     * Move uploaded image to upload directory
+     * @param string $fileName
+     * @return bool
+     */
     private function saveImage($fileName)
     {
         return move_uploaded_file($this->image['tmp_name'], self::UPLOAD_DIR . $fileName);

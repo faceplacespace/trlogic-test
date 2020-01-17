@@ -1,5 +1,5 @@
 <?php
 
-namespace components\exception;
+namespace components\exceptions;
 
 class ImageUploadException extends \Exception {}

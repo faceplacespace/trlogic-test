@@ -7,6 +7,9 @@ use components\FlashMessages;
 
 class RegisterController extends Controller
 {
+    /**
+     * displaying sign up form
+     */
     public function index()
     {
         $title = $this->dict['signup'];
@@ -18,6 +21,9 @@ class RegisterController extends Controller
         include '../app/views/signup.view.php';
     }
 
+    /**
+     * Attempts to sign up a user
+     */
     public function register()
     {
         $user = new User();

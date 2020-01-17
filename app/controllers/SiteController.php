@@ -6,6 +6,9 @@ use app\models\User;
 
 class SiteController extends Controller
 {
+    /**
+     * Displaying user profile
+     */
     public function index()
     {
         $title = $this->dict['profile'];;

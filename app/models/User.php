@@ -4,6 +4,11 @@ namespace app\models;
 
 class User extends Model
 {
+    /**
+     * Returns whether the user is currently logged in
+     *
+     * @return bool
+     */
     public static function isAuth()
     {
         if (isset($_SESSION['user'])) {
@@ -12,11 +17,23 @@ class User extends Model
         return false;
     }
 
+    /**
+     * Check user email validity
+     *
+     * @param string $email
+     * @return mixed
+     */
     public static function checkEmail($email)
     {
         return filter_var($email, FILTER_VALIDATE_EMAIL);
     }
 
+    /**
+     * Check user password validity
+     *
+     * @param string $password
+     * @return bool
+     */
     public static function checkPassword($password)
     {
         if (strlen($password) < 6) {
@@ -26,11 +43,21 @@ class User extends Model
         return true;
     }
 
+    /**
+     * Sign in a user
+     *
+     * @param string $email
+     */
     public function auth($email)
     {
         $_SESSION['user'] = $email;
     }
 
+    /**
+     * Creates a new user
+     *
+     * @param array $data
+     */
     public function create(array $data)
     {
         $stmt = $this->db->prepare('INSERT INTO users (email, password, username, image) VALUES (:email, :password, :username, :file)');
@@ -42,11 +69,24 @@ class User extends Model
         ]);
     }
 
+
+    /**
+     * Generate password hash
+     *
+     * @param string $password
+     * @return bool|string
+     */
     private function passwordHash($password)
     {
         return password_hash($password, PASSWORD_BCRYPT);
     }
 
+    /**
+     * Checks if user already exists
+     *
+     * @param $email
+     * @return bool
+     */
     public function exists($email)
     {
         $stmt = $this->db->prepare('SELECT email FROM users WHERE email = :email');
@@ -59,6 +99,12 @@ class User extends Model
         return false;
     }
 
+    /**
+     * getUserDataByEmailAddress
+     *
+     * @param string $email
+     * @return mixed
+     */
     public function getOne($email)
     {
         $stmt = $this->db->prepare('SELECT * FROM users WHERE email = :email');
@@ -66,6 +112,13 @@ class User extends Model
         return $stmt->fetch();
     }
 
+    /**
+     * Check users email and password correctness
+     *
+     * @param $email
+     * @param $password
+     * @return bool
+     */
     public function check($email, $password)
     {
         $stmt = $this->db->prepare('SELECT * FROM users WHERE email = :email AND password = :password');

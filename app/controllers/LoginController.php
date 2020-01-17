@@ -7,6 +7,9 @@ use components\FlashMessages;
 
 class LoginController extends Controller
 {
+    /**
+     * displaying sign in form
+     */
     public function index()
     {
         $title = $this->dict['signin'];;
@@ -18,6 +21,9 @@ class LoginController extends Controller
         include '../app/views/signin.view.php';
     }
 
+    /**
+     *  Attempts to sign in a user
+     */
     public function login()
     {
         $user = new User();
@@ -46,6 +52,9 @@ class LoginController extends Controller
         }
     }
 
+    /**
+     * Logs the user out
+     */
     public function logout()
     {
         unset($_SESSION['user']);

@@ -11,6 +11,9 @@ class Router
         $this->routes = include($_SERVER['DOCUMENT_ROOT'] . '/config/routes.php');
     }
 
+    /**
+     * execute the router
+     */
     public function run()
     {
         $uri = $this->getURI();
@@ -45,6 +48,11 @@ class Router
         }
     }
 
+    /**
+     * get current request uri
+     *
+     * @return string
+     */
     private function getURI()
     {
         if (!empty($_SERVER['REQUEST_URI'])) {

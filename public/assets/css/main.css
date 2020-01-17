@@ -304,12 +304,21 @@ header {
 header a {
   color: #fff;
   text-decoration: none;
+  font-size: 13px;
+}
+
+header a.active {
+  font-weight: bold;
   font-size: 16px;
 }
 
 div.lang {
   margin-right: 30px;
   float: left;
+}
+
+.logout {
+  font-size: 16px;
 }
 
 label{
@@ -341,6 +350,15 @@ input[type="file"] {
   float: right;
   text-decoration: none;
   font-size: 16px;
+}
+
+.invalid {
+  border-bottom: 2px solid #f33467;
+}
+
+div.invalid-text {
+  color: #f33467;
+  font-size: 12px;
 }
 
 .bottom-link:hover {
